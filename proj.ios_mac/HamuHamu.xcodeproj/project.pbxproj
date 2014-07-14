@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		1616C56B196FB64A003D095F /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1616C569196FB64A003D095F /* GameScene.cpp */; };
 		1640BEAF196FDA5B00593581 /* BackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 1640BEAC196FDA5B00593581 /* BackGround.png */; };
-		1640BEB0196FDA5B00593581 /* Fertilizer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1640BEAD196FDA5B00593581 /* Fertilizer_1.png */; };
 		1640BEB91970238100593581 /* HamsterSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1640BEB71970238100593581 /* HamsterSprite.cpp */; };
 		1640BEBC19703B4100593581 /* Hamster_1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1640BEBA19703B4100593581 /* Hamster_1_1.png */; };
 		1640BEBF19703DF300593581 /* Hamster_1_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1640BEBE19703DF300593581 /* Hamster_1_2.png */; };
-		1640BEC21970AE5D00593581 /* Fertilizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1640BEC01970AE5D00593581 /* Fertilizer.cpp */; };
+		1640BEC51972965F00593581 /* FertilizerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1640BEC31972965F00593581 /* FertilizerSprite.cpp */; };
+		1640BEC7197297C700593581 /* Fertilizer_1_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1640BEC6197297C700593581 /* Fertilizer_1_1.png */; };
 		1AC6FB1F180E996B004C840B /* libbox2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFF180E9839004C840B /* libbox2d Mac.a */; };
 		1AC6FB20180E996B004C840B /* libchipmunk Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAFD180E9839004C840B /* libchipmunk Mac.a */; };
 		1AC6FB21180E996B004C840B /* libcocos2dx Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2dx Mac.a */; };
@@ -226,13 +226,13 @@
 		1616C56A196FB64A003D095F /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = ../Classes/GameScene.h; sourceTree = "<group>"; };
 		1640BEA7196FD92500593581 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../Classes/Config.h; sourceTree = "<group>"; };
 		1640BEAC196FDA5B00593581 /* BackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackGround.png; sourceTree = "<group>"; };
-		1640BEAD196FDA5B00593581 /* Fertilizer_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fertilizer_1.png; sourceTree = "<group>"; };
 		1640BEB71970238100593581 /* HamsterSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HamsterSprite.cpp; path = ../Classes/HamsterSprite.cpp; sourceTree = "<group>"; };
 		1640BEB81970238100593581 /* HamsterSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HamsterSprite.h; path = ../Classes/HamsterSprite.h; sourceTree = "<group>"; };
 		1640BEBA19703B4100593581 /* Hamster_1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hamster_1_1.png; sourceTree = "<group>"; };
 		1640BEBE19703DF300593581 /* Hamster_1_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Hamster_1_2.png; sourceTree = "<group>"; };
-		1640BEC01970AE5D00593581 /* Fertilizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Fertilizer.cpp; path = ../Classes/Fertilizer.cpp; sourceTree = "<group>"; };
-		1640BEC11970AE5D00593581 /* Fertilizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fertilizer.h; path = ../Classes/Fertilizer.h; sourceTree = "<group>"; };
+		1640BEC31972965F00593581 /* FertilizerSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FertilizerSprite.cpp; path = ../Classes/FertilizerSprite.cpp; sourceTree = "<group>"; };
+		1640BEC41972965F00593581 /* FertilizerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FertilizerSprite.h; path = ../Classes/FertilizerSprite.h; sourceTree = "<group>"; };
+		1640BEC6197297C700593581 /* Fertilizer_1_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fertilizer_1_1.png; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -363,8 +363,8 @@
 				1640BEA7196FD92500593581 /* Config.h */,
 				1640BEB71970238100593581 /* HamsterSprite.cpp */,
 				1640BEB81970238100593581 /* HamsterSprite.h */,
-				1640BEC01970AE5D00593581 /* Fertilizer.cpp */,
-				1640BEC11970AE5D00593581 /* Fertilizer.h */,
+				1640BEC31972965F00593581 /* FertilizerSprite.cpp */,
+				1640BEC41972965F00593581 /* FertilizerSprite.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -480,10 +480,10 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1640BEC6197297C700593581 /* Fertilizer_1_1.png */,
 				1640BEBE19703DF300593581 /* Hamster_1_2.png */,
 				1640BEBA19703B4100593581 /* Hamster_1_1.png */,
 				1640BEAC196FDA5B00593581 /* BackGround.png */,
-				1640BEAD196FDA5B00593581 /* Fertilizer_1.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -662,7 +662,6 @@
 				50EF629917ECD46A001EB2F8 /* Icon-100.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
-				1640BEB0196FDA5B00593581 /* Fertilizer_1.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
@@ -671,6 +670,7 @@
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
 				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
 				1640BEBF19703DF300593581 /* Hamster_1_2.png in Resources */,
+				1640BEC7197297C700593581 /* Fertilizer_1_1.png in Resources */,
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
@@ -704,10 +704,10 @@
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				1640BEB91970238100593581 /* HamsterSprite.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
+				1640BEC51972965F00593581 /* FertilizerSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1616C56B196FB64A003D095F /* GameScene.cpp in Sources */,
 				1AFAF8B816D35DE700DB1158 /* HelloWorldScene.cpp in Sources */,
-				1640BEC21970AE5D00593581 /* Fertilizer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -806,7 +806,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -838,7 +838,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

@@ -23,12 +23,14 @@ protected:
     enum Tag
     {
         kTagBackground = 1,     // 画像のタグ
-        kTagHamster    = 10000, // ハムスターの基準タグ
+        kTagHamster    = 10001, // ハムスターの基準タグ
+        kTagFertilizer = 20001, // 肥料のタグ
     };
     
     enum kZOrder
     {
         kZOrderBackground, // zオーダー
+        kZOrderFertilizer, // 肥料の基準タグ
         kZOrderHamster,    // ハムスターの基準タグ
     };
     
@@ -43,13 +45,23 @@ protected:
     void showHamster();
     void initForVariables();
     cocos2d::Point getPosition(int posIndexX, int posIndexY);
-    int getTag(int index);
+    int getHamsterTag(int index);
     
-
+    std::vector<int> fertilizerTags;
+    
+    int getCurrentFertilizerTag();
+    void harvestFertilizer(float posX, float posY, int index);
+    
+    bool m_harvesting;
+    
 public:
     virtual bool init();
     static cocos2d::Scene* scene();
     CREATE_FUNC(GameScene);
+    
+    virtual bool onTouchBegan(cocos2d::Touch* pTouch, cocos2d::Event* pEvent);
+    virtual void onTouchMoved(cocos2d::Touch *pTouch, cocos2d::Event *pEvent);
+    virtual void onTouchEnded(cocos2d::Touch* pTouch, cocos2d::Event* pEvent);
 };
 
 #endif // __GAMESCENE_SCENE_H__

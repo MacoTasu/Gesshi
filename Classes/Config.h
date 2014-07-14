@@ -11,10 +11,12 @@
 
 enum kFertilizer {
     kSmall,
+    kFertilizerCount,
 };
 
 enum kHamster {
     kDjungarian,
+    //kHamsterCount,
 };
 
 #endif

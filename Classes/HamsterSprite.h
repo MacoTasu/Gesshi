@@ -13,6 +13,7 @@
 
 #include "cocos2d.h"
 #include "Config.h"
+#include "FertilizerSprite.h"
 
 class HamsterSprite : public cocos2d::Sprite
 {
@@ -28,6 +29,9 @@ public:
     virtual bool initWithHamsterType(kHamster hamsterType);
     static HamsterSprite* createWithHamsterType(kHamster hamsterType);
     void runAnimation(kHamster hamsterType);
+    FertilizerSprite* drawFertilizer();
 };
 
 #endif /* defined(__HamuHamu__HamsterSprite__) */
+
+

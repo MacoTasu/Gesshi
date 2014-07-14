@@ -7,6 +7,7 @@
 //
 
 #include "HamsterSprite.h"
+#include "FertilizerSprite.h"
 
 HamsterSprite::HamsterSprite()
 {
@@ -69,4 +70,16 @@ void HamsterSprite::runAnimation(kHamster hamsterType)
             cocos2d::RepeatForever *animated = cocos2d::RepeatForever::create(animate);
             this->runAction(animated);
     }
+}
+
+FertilizerSprite* HamsterSprite::drawFertilizer()
+{
+    //タグをランダムに取得する処理
+    int posX = this->getPositionX();
+    int posY = this->getPositionY();
+    kFertilizer fertilizerType = (kFertilizer)( rand() % kFertilizerCount);
+    FertilizerSprite* pFertilizer = FertilizerSprite::createWithFertilizerType(fertilizerType);
+    pFertilizer->setPosition(cocos2d::Point(posX, posY));
+    
+    return pFertilizer;
 }
