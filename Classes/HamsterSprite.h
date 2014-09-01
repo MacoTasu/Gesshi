@@ -19,6 +19,7 @@ class HamsterSprite : public cocos2d::Sprite
 {
 protected:
     const char* getHamsterImageFileName(kHamster hamsterType);
+    cocos2d::Rect getRect();
     
 public:
     CC_SYNTHESIZE_READONLY(kHamster, m_hamsterType, HamsterType);
@@ -29,7 +30,11 @@ public:
     virtual bool initWithHamsterType(kHamster hamsterType);
     static HamsterSprite* createWithHamsterType(kHamster hamsterType);
     void runAnimation(kHamster hamsterType);
-    FertilizerSprite* drawFertilizer();
+    FertilizerSprite* drawFertilizer(bool direct);
+    cocos2d::MoveTo* generateMove(cocos2d::Point point);
+    void feelAnimation();
+    bool isTouchPoint(cocos2d::Point point);
+    bool flipped;
 };
 
 #endif /* defined(__HamuHamu__HamsterSprite__) */

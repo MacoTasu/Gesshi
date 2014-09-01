@@ -13,9 +13,12 @@
 
 #include "cocos2d.h"
 #include "Config.h"
+#include "FertilizerSprite.h"
 
 #define PNG_BACKGROUND "BackGround.png"
 #define MOVING_TIME 0.2f;
+
+using namespace std;
 
 class GameScene : public cocos2d::Layer
 {
@@ -41,18 +44,22 @@ protected:
     cocos2d::Sprite* m_background;
     void showBackground();
     
-    float m_hamsterSize;
     void showHamster();
     void initForVariables();
     cocos2d::Point getPosition(int posIndexX, int posIndexY);
     int getHamsterTag(int index);
+    int m_fertilizer_count;
     
-    std::vector<int> fertilizerTags;
+    cocos2d::Vector<FertilizerSprite*> fertilizers;
     
-    int getCurrentFertilizerTag();
-    void harvestFertilizer(float posX, float posY, int index);
-    
-    bool m_harvesting;
+    int getNextFertilizerTag();
+    void harvestFertilizer(cocos2d::Ref* pSender);
+    void showFertilizer(bool direct);
+    long m_score;
+    void showScore();
+    void showMenuButton();
+    bool m_manual_moving_hamster;
+    cocos2d::Label* scoreLabel;
     
 public:
     virtual bool init();

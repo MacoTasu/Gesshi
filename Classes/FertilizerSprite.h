@@ -29,6 +29,8 @@ public:
     bool canSet();
     int getScore();
     kFertilizer getType();
+    void runSetAnimation(bool flipped);
+    void removeAnimation();
 };
 
 #endif /* defined(__HamuHamu__Fertilizer__) */
