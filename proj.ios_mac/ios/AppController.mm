@@ -27,6 +27,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "GoogleAnalyticsTracker.h"
 
 @implementation AppController
 
@@ -54,7 +55,7 @@ static AppDelegate s_sharedApplication;
 
     // Use RootViewController manage CCEAGLView 
     _viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
-    _viewController.wantsFullScreenLayout = YES;
+    _viewController.extendedLayoutIncludesOpaqueBars = YES;
     _viewController.view = eaglView;
 
     // Set RootViewController to window
@@ -68,6 +69,8 @@ static AppDelegate s_sharedApplication;
         // use this method on ios6
         [window setRootViewController:_viewController];
     }
+    
+    GoogleAnalyticsTracker::setup();
 
     [window makeKeyAndVisible];
 

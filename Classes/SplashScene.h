@@ -12,7 +12,7 @@
 #include <iostream>
 #include "cocos2d.h"
 #include "Config.h"
-#include "FertilizerSprite.h"
+#include "StoneSprite.h"
 
 #define PNG_SPLASH "Default-568h@2x.png"
 
@@ -29,8 +29,9 @@ protected:
         kZOrderSplash, // zオーダー
     };
     cocos2d::Sprite* m_splash;
-    void showSplash();
+    void showText();
     void gameStart(float time);
+    void onEnter();
     
 public:
     virtual bool init();

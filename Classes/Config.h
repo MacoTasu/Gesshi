@@ -9,14 +9,17 @@
 #ifndef HamuHamu_Config_h
 #define HamuHamu_Config_h
 
-enum kFertilizer {
+enum kStone {
     kSmall,
-    kFertilizerCount,
+    kStar,
+    kWater,
+    kHeart,
+    kStoneCount,
 };
 
-enum kHamster {
-    kDjungarian,
-    //kHamsterCount,
+enum kGesshi {
+    kTamaGesshi,
+    //kGesshiCount,
 };
 
 #endif

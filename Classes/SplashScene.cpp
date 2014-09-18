@@ -8,6 +8,8 @@
 
 #include "SplashScene.h"
 #include "GameScene.h"
+#include "LabelRPG.h"
+#include "GoogleAnalyticsTracker.h"
 
 USING_NS_CC;
 
@@ -22,14 +24,32 @@ Scene* SplashScene::scene()
     return scene;
 }
 
-void SplashScene::showSplash()
+void SplashScene::onEnter()
 {
-    Size winSize = Director::getInstance()->getVisibleSize();
+    Layer::onEnter();
     
-    // 背景を生成
-    m_splash = Sprite::create(PNG_SPLASH);
-    m_splash->setPosition(winSize.width / 2, winSize.height / 2);
-    addChild(m_splash,kZOrderSplash, kTagSplash);
+    GoogleAnalyticsTracker::sendScreen("Splashcene");
+}
+
+void SplashScene::showText()
+{
+    TTFConfig ttfConfig("Hiragino Sans GB W3.otf",
+                        30,
+                        GlyphCollection::DYNAMIC);
+    // 基本はLabelと同じ
+    auto textLabel = LabelRPG::createWithTTF(ttfConfig, "");
+    textLabel->setVerticalAlignment(cocos2d::TextVAlignment::TOP);
+    textLabel->setHorizontalAlignment(cocos2d::TextHAlignment::LEFT);
+    textLabel->setColor(Color3B::WHITE);
+    
+    //setPositionは使っても意味ないです
+    //テキスト送りしながらsetPositionで位置を変えてるので、以下でベースの位置を設定してください
+    textLabel->setOriginalPosition(Point(30, this->getContentSize().height/2 + textLabel->getContentSize().height + 20));
+    
+    // テキスト送り開始（1文字 0.05秒で出す）
+    textLabel->setStringWithRunText("これはげっ歯族の命を\nかけた戦いである", 0.1f);
+    
+    this->addChild(textLabel);
 }
 
 bool SplashScene::init()
@@ -39,10 +59,10 @@ bool SplashScene::init()
         return false;
     }
     
-    showSplash();
+    showText();
     
     // 1.5秒後にタイトルに移動する
-    this->scheduleOnce(schedule_selector(SplashScene::gameStart), 1.5f);
+    this->scheduleOnce(schedule_selector(SplashScene::gameStart), 3.0f);
 
     return true;
 }
