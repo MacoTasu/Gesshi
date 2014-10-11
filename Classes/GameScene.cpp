@@ -10,6 +10,9 @@
 #include "GesshiSprite.h"
 #include "StoneSprite.h"
 #include "GoogleAnalyticsTracker.h"
+#include "AudioManager.h"
+#include "ModalLayer.h"
+#include "MenuSound.h"
 
 USING_NS_CC;
 
@@ -59,11 +62,11 @@ bool GameScene::init()
     
     showHeader();
     
-    showMenuButton();
+    //showMenuButton();
     
     //createIconBanner();
     
-    //createButtomBanner();
+    createButtomBanner();
     
     //定期的に呼び出す
     this->schedule(schedule_selector(GameScene::moveGesshi), 1.0f);
@@ -102,26 +105,27 @@ void GameScene::initForVariables()
     srand((unsigned)time(NULL));
     
     // 前回の時間をとる
-    time_t previousTime = (time_t)CCUserDefault::getInstance()->getIntegerForKey("previousTime", 0);
+    time_t previousTime = (time_t)CCUserDefault::getInstance()->getIntegerForKey(PREVIOUS_TIME);
     
-    if (int diff = diffDays(previousTime)) {
+    int diff = diffDays(previousTime);
+    if (diff >= 0) {
         // 一日経過してたなら現在時刻をセット(初回時も)
-        CCUserDefault::getInstance()->setIntegerForKey("previousTime", (int)time(NULL));
+        CCUserDefault::getInstance()->setIntegerForKey(PREVIOUS_TIME, (int)time(NULL));
 
-        int previous_life_days = CCUserDefault::getInstance()->getIntegerForKey("lifeDays");
-        CCUserDefault::getInstance()->setIntegerForKey("lifeDays",diff + previous_life_days);
+        int previous_life_days = CCUserDefault::getInstance()->getIntegerForKey(LIFE_DAYS);
+        CCUserDefault::getInstance()->setIntegerForKey(LIFE_DAYS,diff + previous_life_days);
     }
     
-    if (CCUserDefault::getInstance()->getIntegerForKey("lifeDays") <=0) {
+    if (CCUserDefault::getInstance()->getIntegerForKey(LIFE_DAYS) <= 0) {
         m_life_days = 1;
-        CCUserDefault::getInstance()->setIntegerForKey("lifeDays",1);
+        CCUserDefault::getInstance()->setIntegerForKey(LIFE_DAYS,m_life_days);
     }
     else {
-        m_life_days = CCUserDefault::getInstance()->getIntegerForKey("lifeDays");
+        m_life_days = CCUserDefault::getInstance()->getIntegerForKey(LIFE_DAYS);
     }
     
     m_stone_count          = kTagStone;
-    m_gp                   = CCUserDefault::getInstance()->getFloatForKey("gesshiPoint");
+    m_gp                   = CCUserDefault::getInstance()->getFloatForKey(GESSHI_POINT);
     m_manual_moving_gesshi = false;
     
     CCUserDefault::getInstance()->flush();
@@ -195,10 +199,10 @@ void GameScene::moveGesshi(float frame)
 {
     GesshiSprite* gesshiSprite = (GesshiSprite*)m_background->getChildByTag(kTagGesshi);
     
-    ActionInterval* action = gesshiSprite->generateMove(Point::ZERO);
+    ActionInterval* action = gesshiSprite->generateMove(m_background->boundingBox());
     
     auto finish = CallFunc::create([gesshiSprite,this](){
-        GameScene::showStone(false);
+        //GameScene::showStone(false);
     });
     
     Spawn* spawn = Spawn::create(action, finish, NULL);
@@ -207,7 +211,7 @@ void GameScene::moveGesshi(float frame)
 }
 
 void GameScene::showStone(bool direct) {
-    if (stones.size() >= 300) {
+    if (stones.size() >= 25) {
         return;
     }
     
@@ -218,7 +222,7 @@ void GameScene::showStone(bool direct) {
         int nextTag = getNextStoneTag();
         GameScene::m_background->addChild(pStone, kZOrderStone, nextTag);
         
-        pStone->runSetAnimation(gesshiSprite->flipped);
+        pStone->runSetAnimation(gesshiSprite->isFlipped);
         stones.pushBack(pStone);
     }
 }
@@ -229,6 +233,16 @@ int GameScene::getNextStoneTag() {
 
 void GameScene::harvestStone(cocos2d::Ref* pSender) {
     CCLOG("Clean");
+    //auto layer = ModalLayer::create();
+    //layer->init();
+    //this->addChild(layer,100);
+    
+    if (stones.size() > 0) {
+        const std::string harvest = "stone-break1.mp3";
+        AudioManager *sound;
+        sound->preloadSE(harvest);
+        sound->playSE(harvest);
+    }
     
     for (auto &pStone : stones) {
         m_gp += pStone->getScore();
@@ -241,11 +255,10 @@ void GameScene::harvestStone(cocos2d::Ref* pSender) {
     CCLOG("%f",scoreLabel->getContentSize().width);
     scoreLabel->setPosition(Point(scoreBoard->getContentSize().width - scoreLabel->getContentSize().width ,  scoreLabel->getContentSize().height/2 + 5));
     
-    CCUserDefault::getInstance()->setFloatForKey("gesshiPoint", m_gp);
+    CCUserDefault::getInstance()->setFloatForKey(GESSHI_POINT, m_gp);
     CCUserDefault::getInstance()->flush();
     
     stones.clear();
-    // add the label as a child to this layer
 }
 
 bool GameScene::onTouchBegan(Touch* pTouch, Event* pEvent) {
@@ -254,8 +267,8 @@ bool GameScene::onTouchBegan(Touch* pTouch, Event* pEvent) {
     GesshiSprite* gesshiSprite = (GesshiSprite*)m_background->getChildByTag(kTagGesshi);
 
     if (gesshiSprite->isTouchPoint(touchPoint)) {
-        GameScene::showStone(true);
         gesshiSprite->feelAnimation();
+        gesshiSprite->talk();
         CCLOG("Touch!!!");
     }
     
@@ -291,5 +304,18 @@ int GameScene::diffDays(time_t time)
     //int diffYear = nowYear - previousYear;
     
     return diffDay;
+}
+
+int GameScene::diffMinutes(time_t time)
+{
+    // 現在の日付
+    struct tm *nowDate;
+    time_t now;
+    nowDate = localtime(&now);
+    struct tm *previousDate;
+    time_t previousTime = time;
+    previousDate = localtime(&previousTime);
+    
+    return nowDate->tm_min - previousDate->tm_min;
 }
 

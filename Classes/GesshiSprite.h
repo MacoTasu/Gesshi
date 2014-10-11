@@ -20,6 +20,10 @@ class GesshiSprite : public cocos2d::Sprite
 protected:
     const char* getGesshiImageFileName(kGesshi gesshiType);
     cocos2d::Rect getRect();
+    cocos2d::Label* syllableLabel;
+    bool isTalking;
+    std::vector<std::string> syllabes;
+    void setSyllable();
     
 public:
     CC_SYNTHESIZE_READONLY(kGesshi, m_gesshiType, GesshiType);
@@ -31,11 +35,14 @@ public:
     static GesshiSprite* createWithGesshiType(kGesshi gesshiType);
     void runAnimation(kGesshi gesshiType);
     StoneSprite* drawStone(bool direct);
-    cocos2d::ActionInterval* generateMove(cocos2d::Point point);
+    cocos2d::ActionInterval* generateMove(cocos2d::Rect rect);
     void feelAnimation();
     bool isTouchPoint(cocos2d::Point point);
-    bool flipped;
     int remainLifeDays(kGesshi gesshiType);
+    GesshiSprite* drawGesshi();
+    void runSetAnimation(bool flipped);
+    void talk();
+    bool isFlipped;
 };
 
 #endif /* defined(__HamuHamu__GesshiSprite__) */

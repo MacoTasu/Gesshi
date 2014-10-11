@@ -47,7 +47,7 @@ void SplashScene::showText()
     textLabel->setOriginalPosition(Point(30, this->getContentSize().height/2 + textLabel->getContentSize().height + 20));
     
     // テキスト送り開始（1文字 0.05秒で出す）
-    textLabel->setStringWithRunText("これはげっ歯族の命を\nかけた戦いである", 0.1f);
+    textLabel->setStringWithRunText("うぇーーい", 0.1f);
     
     this->addChild(textLabel);
 }

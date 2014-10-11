@@ -57,6 +57,7 @@ protected:
     int getNextStoneTag();
     void harvestStone(cocos2d::Ref* pSender);
     void showStone(bool direct);
+    void showG();
     long m_gp;
     int  m_life_days;
     void showHeader();
@@ -69,6 +70,7 @@ protected:
     cocos2d::Sprite* scoreBoard;
     cocos2d::Sprite* careBoard;
     int diffDays(time_t time);
+    int diffMinutes(time_t time);
     
 public:
     virtual bool init();
