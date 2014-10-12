@@ -8,7 +8,6 @@
 
 #include "GameScene.h"
 #include "GesshiSprite.h"
-#include "StoneSprite.h"
 #include "GoogleAnalyticsTracker.h"
 #include "AudioManager.h"
 #include "ModalLayer.h"

@@ -13,7 +13,6 @@
 
 #include "cocos2d.h"
 #include "Config.h"
-#include "StoneSprite.h"
 
 class GesshiSprite : public cocos2d::Sprite
 {
@@ -34,7 +33,6 @@ public:
     virtual bool initWithGesshiType(kGesshi gesshiType);
     static GesshiSprite* createWithGesshiType(kGesshi gesshiType);
     void runAnimation();
-    StoneSprite* drawStone(bool direct);
     void generateMove(float frame);
     void feelAnimation();
     bool isTouchPoint(cocos2d::Point point);

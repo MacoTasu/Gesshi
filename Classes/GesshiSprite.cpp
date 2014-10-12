@@ -7,7 +7,6 @@
 //
 
 #include "GesshiSprite.h"
-#include "StoneSprite.h"
 #include "AudioManager.h"
 
 GesshiSprite::GesshiSprite()
@@ -94,32 +93,6 @@ void GesshiSprite::runAnimation()
             cocos2d::Animate *animate        = cocos2d::Animate::create(animation);
             cocos2d::RepeatForever *animated = cocos2d::RepeatForever::create(animate);
             this->runAction(animated);
-    }
-}
-
-StoneSprite* GesshiSprite::drawStone(bool direct)
-{
-    //タグをランダムに取得する処理
-    int posX = this->getPositionX();
-    int posY = this->getPositionY();
-    kStone stoneType = (kStone)( rand() % kStoneCount);
-    StoneSprite* pStone = StoneSprite::createWithStoneType(stoneType);
-    pStone->setPosition(cocos2d::Point(posX, posY));
-    
-    if (direct == true) {
-        return pStone;
-    }
-    
-    if (pStone->canSet()) {
-        const std::string drop = "water-drop1.mp3";
-        AudioManager *sound;
-        sound->preloadSE(drop);
-        sound->playSE(drop);
-        
-        return pStone;
-    }
-    else {
-        return NULL;
     }
 }
 

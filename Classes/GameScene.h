@@ -13,7 +13,6 @@
 
 #include "cocos2d.h"
 #include "Config.h"
-#include "StoneSprite.h"
 #include "NendIconModule.h"
 #include "NendModule.h"
 #include "GesshiSprite.h"
