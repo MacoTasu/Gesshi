@@ -33,13 +33,14 @@ public:
     
     virtual bool initWithGesshiType(kGesshi gesshiType);
     static GesshiSprite* createWithGesshiType(kGesshi gesshiType);
-    void runAnimation(kGesshi gesshiType);
+    void runAnimation();
     StoneSprite* drawStone(bool direct);
-    cocos2d::ActionInterval* generateMove(cocos2d::Rect rect);
+    void generateMove(float frame);
     void feelAnimation();
     bool isTouchPoint(cocos2d::Point point);
-    int remainLifeDays(kGesshi gesshiType);
-    GesshiSprite* drawGesshi();
+    int remainLifeDays();
+    GesshiSprite* drawGesshi(kGesshi gesshiType);
+    void cloneAnimation();
     void runSetAnimation(bool flipped);
     void talk();
     bool isFlipped;

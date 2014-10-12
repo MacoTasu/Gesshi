@@ -13,14 +13,6 @@
 #define PREVIOUS_TIME "previous_time"
 #define LIFE_DAYS "life_days"
 
-enum kStone {
-    kSmall,
-    kStar,
-    kWater,
-    kHeart,
-    kStoneCount,
-};
-
 enum kGesshi {
     kTamaGesshi,
     //kGesshiCount,

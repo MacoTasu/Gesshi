@@ -16,6 +16,7 @@
 #include "StoneSprite.h"
 #include "NendIconModule.h"
 #include "NendModule.h"
+#include "GesshiSprite.h"
 
 #define PNG_BACKGROUND "BackGround.png"
 #define MOVING_TIME 0.2f;
@@ -28,19 +29,14 @@ protected:
     enum Tag
     {
         kTagBackground = 1,     // 画像のタグ
-        kTagGesshi    = 10001, // ハムスターの基準タグ
-        kTagStone = 20001, // 肥料のタグ
+        kTagGesshi     = 10001, // ハムスターの基準タグ
     };
     
     enum kZOrder
     {
         kZOrderBackground, // zオーダー
-        kZOrderStone, // 肥料の基準タグ
         kZOrderGesshi,    // ハムスターの基準タグ
     };
-    
-   
-    void moveGesshi(float frame);
     
     //背景画像
     cocos2d::Sprite* m_background;
@@ -50,14 +46,10 @@ protected:
     void initForVariables();
     cocos2d::Point getPosition(int posIndexX, int posIndexY);
     int getGesshiTag(int index);
-    int m_stone_count;
+
+    cocos2d::Vector<GesshiSprite*> gesshies;
     
-    cocos2d::Vector<StoneSprite*> stones;
-    
-    int getNextStoneTag();
-    void harvestStone(cocos2d::Ref* pSender);
-    void showStone(bool direct);
-    void showG();
+    void createGesshi();
     long m_gp;
     int  m_life_days;
     void showHeader();

@@ -46,6 +46,8 @@ bool GesshiSprite::initWithGesshiType(kGesshi gesshiType)
     isTalking = false;
     
     setSyllable();
+    
+    this->schedule(schedule_selector(GesshiSprite::generateMove), 2.0);
 
     return true;
 }
@@ -69,9 +71,9 @@ const char* GesshiSprite::getGesshiImageFileName(kGesshi gesshiType)
     }
 }
 
-int GesshiSprite::remainLifeDays(kGesshi gesshiType)
+int GesshiSprite::remainLifeDays()
 {
-    switch (gesshiType) {
+    switch (m_gesshiType) {
         case kTamaGesshi:
             return rand() % 2 + 1;
         default:
@@ -80,10 +82,10 @@ int GesshiSprite::remainLifeDays(kGesshi gesshiType)
     }
 }
 
-void GesshiSprite::runAnimation(kGesshi gesshiType)
+void GesshiSprite::runAnimation()
 {
     cocos2d::Animation *animation = cocos2d::Animation::create();
-    switch (gesshiType) {
+    switch (m_gesshiType) {
         case kTamaGesshi:
             animation->addSpriteFrameWithFile("Gesshi_1.png");
             animation->setRestoreOriginalFrame(true);
@@ -121,18 +123,21 @@ StoneSprite* GesshiSprite::drawStone(bool direct)
     }
 }
 
-GesshiSprite* GesshiSprite::drawGesshi()
+GesshiSprite* GesshiSprite::drawGesshi(kGesshi gesshiType)
 {
     //タグをランダムに取得する処理
     int posX = this->getPositionX();
     int posY = this->getPositionY();
-    GesshiSprite* pGesshi = GesshiSprite::createWithGesshiType(kTamaGesshi);
+    GesshiSprite* pGesshi = GesshiSprite::createWithGesshiType(gesshiType);
     pGesshi->setPosition(cocos2d::Point(posX, posY));
     
     return pGesshi;
 }
 
-cocos2d::ActionInterval* GesshiSprite::generateMove(cocos2d::Rect rect) {
+void GesshiSprite::generateMove(float frame) {
+    cocos2d::Sprite *parent = (cocos2d::Sprite*)this->getParent();
+    cocos2d::Rect rect = parent->boundingBox();
+    
     int posX  = 0;
     int posY  = 0;
     int randX = 0;
@@ -189,11 +194,21 @@ cocos2d::ActionInterval* GesshiSprite::generateMove(cocos2d::Rect rect) {
         
         pPoint = cocos2d::Point(randX,randY);
     }
+    
+    float time = rand() % int(frame + 1);
+    if (time < 1.0) {
+        time = 1.0;
+    }
 
-    cocos2d::ActionInterval* action = cocos2d::JumpBy::create(0.5, pPoint, 10, 2);
+    cocos2d::ActionInterval* action = cocos2d::JumpBy::create(time, pPoint, 10, 2);
     //cocos2d::MoveTo* move = cocos2d::MoveTo::create(0.5, cocos2d::Point( posX, posY ));
     
-    return action;
+    //auto finish = CallFunc::create([gesshiSprite,this](){
+        //GameScene::createGesshi();
+    //});
+    
+    cocos2d::Spawn* spawn = cocos2d::Spawn::create(action, NULL);
+    this->runAction(spawn);
 }
 
 void GesshiSprite::feelAnimation() {
@@ -273,6 +288,21 @@ void GesshiSprite::talk() {
     this->addChild(syllableLabel);
 
     syllableLabel->runAction(spawn);
+}
+
+void GesshiSprite::cloneAnimation() {
+    
+    float posX = 0.0;
+    if (isFlipped == false) {
+        posX = 75.0;
+    }
+    else {
+        posX = - 75.0;
+    }
+    
+    cocos2d::ActionInterval* jumpAction = cocos2d::JumpBy::create(1,cocos2d::Point(posX, rand() % -10) , 30, 1);
+    
+    this->runAction(cocos2d::Sequence::create(jumpAction, NULL));
 }
 
 

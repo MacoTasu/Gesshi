@@ -68,9 +68,6 @@ bool GameScene::init()
     
     createButtomBanner();
     
-    //定期的に呼び出す
-    this->schedule(schedule_selector(GameScene::moveGesshi), 1.0f);
-    
     auto listener = EventListenerTouchOneByOne::create();
     listener->setSwallowTouches(true);
     
@@ -124,7 +121,6 @@ void GameScene::initForVariables()
         m_life_days = CCUserDefault::getInstance()->getIntegerForKey(LIFE_DAYS);
     }
     
-    m_stone_count          = kTagStone;
     m_gp                   = CCUserDefault::getInstance()->getFloatForKey(GESSHI_POINT);
     m_manual_moving_gesshi = false;
     
@@ -140,16 +136,16 @@ Point GameScene::getPosition(int posIndexX, int posIndexY)
 
 // ボタンを並べる
 void GameScene::showMenuButton() {
-    Size winSize = Director::getInstance()->getVisibleSize();
-    auto pHarvestItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
+    //Size winSize = Director::getInstance()->getVisibleSize();
+    //auto pHarvestItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
 
-    auto pFoodItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
-    auto pShopItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
-    auto pAdvertisementItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
-    Menu*  pMenu = Menu::create(pHarvestItem,pFoodItem,pShopItem,pAdvertisementItem,NULL);
-    pMenu->setPosition(Point(winSize.width / 2, 200));
-    pMenu->alignItemsHorizontallyWithPadding(10.0f);
-    this->addChild(pMenu, 1);
+    //auto pFoodItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
+    //auto pShopItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
+    //auto pAdvertisementItem = MenuItemImage::create("Btn_1.png","Btn_1.png",CC_CALLBACK_1(GameScene::harvestStone, this));
+    //Menu*  pMenu = Menu::create(pHarvestItem,pFoodItem,pShopItem,pAdvertisementItem,NULL);
+    //pMenu->setPosition(Point(winSize.width / 2, 200));
+    //pMenu->alignItemsHorizontallyWithPadding(10.0f);
+    //this->addChild(pMenu, 1);
 }
 
 void GameScene::showHeader() {
@@ -181,84 +177,32 @@ void GameScene::showHeader() {
     this->addChild(careBoard, 1);
 }
 
-// ハムスターを表示
+// げっ歯を表示
 void GameScene::showGesshi()
 {
-    // TODO : タグの追加処理が必要かも
-
     // ハムスターを作成
     GesshiSprite* pGesshi = GesshiSprite::createWithGesshiType(kTamaGesshi);
-    pGesshi->setPosition(getPosition(0,0)); // ハムスターのスタート位置
-    m_background->addChild(pGesshi, kZOrderGesshi, kTagGesshi); //ハムスターを増やす時は個々のタグをいじる
+    pGesshi->setPosition(getPosition(0,0));
+    m_background->addChild(pGesshi, kZOrderGesshi, kTagGesshi);
     
-    pGesshi->runAnimation(kTamaGesshi);
+    pGesshi->runAnimation();
 }
 
-
-void GameScene::moveGesshi(float frame)
-{
-    GesshiSprite* gesshiSprite = (GesshiSprite*)m_background->getChildByTag(kTagGesshi);
-    
-    ActionInterval* action = gesshiSprite->generateMove(m_background->boundingBox());
-    
-    auto finish = CallFunc::create([gesshiSprite,this](){
-        //GameScene::showStone(false);
-    });
-    
-    Spawn* spawn = Spawn::create(action, finish, NULL);
-    
-    gesshiSprite->runAction(spawn);
-}
-
-void GameScene::showStone(bool direct) {
-    if (stones.size() >= 25) {
+void GameScene::createGesshi() {
+    if (gesshies.size() >= 5) {
         return;
     }
     
-    GesshiSprite* gesshiSprite = (GesshiSprite*)m_background->getChildByTag(kTagGesshi);
+    const std::string drop = "water-drop1.mp3";
+    AudioManager *sound;
+    sound->preloadSE(drop);
+    sound->playSE(drop);
     
-    StoneSprite* pStone = gesshiSprite->drawStone(direct);
-    if (pStone != NULL) {
-        int nextTag = getNextStoneTag();
-        GameScene::m_background->addChild(pStone, kZOrderStone, nextTag);
-        
-        pStone->runSetAnimation(gesshiSprite->isFlipped);
-        stones.pushBack(pStone);
-    }
-}
-
-int GameScene::getNextStoneTag() {
-    return  m_stone_count += 1;
-}
-
-void GameScene::harvestStone(cocos2d::Ref* pSender) {
-    CCLOG("Clean");
-    //auto layer = ModalLayer::create();
-    //layer->init();
-    //this->addChild(layer,100);
-    
-    if (stones.size() > 0) {
-        const std::string harvest = "stone-break1.mp3";
-        AudioManager *sound;
-        sound->preloadSE(harvest);
-        sound->playSE(harvest);
-    }
-    
-    for (auto &pStone : stones) {
-        m_gp += pStone->getScore();
-        pStone->removeAnimation();
-        //pStone->removeFromParentAndCleanup(true);
-    }
-    m_stone_count = kTagStone;
-    auto str = CCString::createWithFormat("%ld", m_gp);
-    scoreLabel->setString(str->getCString());
-    CCLOG("%f",scoreLabel->getContentSize().width);
-    scoreLabel->setPosition(Point(scoreBoard->getContentSize().width - scoreLabel->getContentSize().width ,  scoreLabel->getContentSize().height/2 + 5));
-    
-    CCUserDefault::getInstance()->setFloatForKey(GESSHI_POINT, m_gp);
-    CCUserDefault::getInstance()->flush();
-    
-    stones.clear();
+    GesshiSprite* gesshiSprite    = (GesshiSprite*)m_background->getChildByTag(kTagGesshi);
+    GesshiSprite* newGesshiSprite = gesshiSprite->drawGesshi(kTamaGesshi);
+    m_background->addChild(newGesshiSprite,kZOrderGesshi);
+    newGesshiSprite->cloneAnimation();
+    gesshies.pushBack(newGesshiSprite);
 }
 
 bool GameScene::onTouchBegan(Touch* pTouch, Event* pEvent) {
@@ -269,6 +213,7 @@ bool GameScene::onTouchBegan(Touch* pTouch, Event* pEvent) {
     if (gesshiSprite->isTouchPoint(touchPoint)) {
         gesshiSprite->feelAnimation();
         gesshiSprite->talk();
+        this->createGesshi();
         CCLOG("Touch!!!");
     }
     

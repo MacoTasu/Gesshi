@@ -17,7 +17,6 @@
 		163A0AD619C6A27F0007339C /* Hiragino Sans GB W3.otf in Resources */ = {isa = PBXBuildFile; fileRef = 163A0AD519C6A27F0007339C /* Hiragino Sans GB W3.otf */; };
 		1640053F19E91E8D0093FB90 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1640053E19E91E8D0093FB90 /* Twitter.framework */; };
 		1640BEB91970238100593581 /* GesshiSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1640BEB71970238100593581 /* GesshiSprite.cpp */; };
-		1640BEC51972965F00593581 /* StoneSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1640BEC31972965F00593581 /* StoneSprite.cpp */; };
 		166334CE19A83ED2006F1CA8 /* SplashScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 166334CC19A83ED2006F1CA8 /* SplashScene.cpp */; };
 		166334D419A86DB7006F1CA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 166334D319A86DB7006F1CA8 /* Images.xcassets */; };
 		16907FEE19CD129100486ABB /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16907FEC19CD129100486ABB /* AudioManager.cpp */; };
@@ -293,8 +292,6 @@
 		1640BEA7196FD92500593581 /* Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../Classes/Config.h; sourceTree = "<group>"; };
 		1640BEB71970238100593581 /* GesshiSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GesshiSprite.cpp; path = ../Classes/GesshiSprite.cpp; sourceTree = "<group>"; };
 		1640BEB81970238100593581 /* GesshiSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GesshiSprite.h; path = ../Classes/GesshiSprite.h; sourceTree = "<group>"; };
-		1640BEC31972965F00593581 /* StoneSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StoneSprite.cpp; path = ../Classes/StoneSprite.cpp; sourceTree = "<group>"; };
-		1640BEC41972965F00593581 /* StoneSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoneSprite.h; path = ../Classes/StoneSprite.h; sourceTree = "<group>"; };
 		166334CC19A83ED2006F1CA8 /* SplashScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SplashScene.cpp; path = ../Classes/SplashScene.cpp; sourceTree = "<group>"; };
 		166334CD19A83ED2006F1CA8 /* SplashScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashScene.h; path = ../Classes/SplashScene.h; sourceTree = "<group>"; };
 		166334D319A86DB7006F1CA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "HamuHamu iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
@@ -500,8 +497,6 @@
 				1640BEA7196FD92500593581 /* Config.h */,
 				1640BEB71970238100593581 /* GesshiSprite.cpp */,
 				1640BEB81970238100593581 /* GesshiSprite.h */,
-				1640BEC31972965F00593581 /* StoneSprite.cpp */,
-				1640BEC41972965F00593581 /* StoneSprite.h */,
 				166334CC19A83ED2006F1CA8 /* SplashScene.cpp */,
 				166334CD19A83ED2006F1CA8 /* SplashScene.h */,
 				163A0AD219C6984B0007339C /* LabelRPG.cpp */,
@@ -988,7 +983,6 @@
 				1640BEB91970238100593581 /* GesshiSprite.cpp in Sources */,
 				16393A7019C9C3DB0030DC90 /* GoogleAnalyticsTracker.mm in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
-				1640BEC51972965F00593581 /* StoneSprite.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				1690804A19CE7A1C00486ABB /* MenuSound.cpp in Sources */,
 				1693D40D19B48CE400C6DCF2 /* NendInterstitialModule.mm in Sources */,
